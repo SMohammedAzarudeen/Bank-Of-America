@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bank of America - Loan Application</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .success-message {
+      display: inline-block;
+      background-color: rgba(0, 255, 17, 0.1);
+      color: rgb(37, 143, 19);
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: normal;
+    }
+
+    .error-message {
+      display: inline-block;
+      background-color: rgba(255, 0, 0, 0.1);
+      color: darkred;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: normal;
+    }
+
+    .hero-image {
+      background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1611&q=80');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 72vh;
+    }
+
+    .fade-transition {
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .fade-out {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <nav class="w-full bg-blue-900 text-white shadow-lg fixed top-0 left-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <span class="text-2xl font-bold">🏦 Bank of America</span>
+      </div>
+      <div class="hidden md:flex items-center space-x-6">
+        <a href="#" onclick="navigateTo('accdashboard')" class="hover:text-blue-200 flex items-center"><span class="mr-1">🏢</span> Home</a>
+        <a href="#" onclick="navigateTo('customercare')" class="hover:text-blue-200 flex items-center"><span class="mr-1">📞</span> Customer Care</a>
+        <a href="#" onclick="navigateTo('features')" class="hover:text-blue-200 flex items-center"><span class="mr-1">✨</span> Features</a>
+        <a href="#" onclick="navigateTo('security')" class="hover:text-blue-200 flex items-center"><span class="mr-1">🔒</span> Security</a>
+        <a href="#" onclick="navigateTo('aboutus')" class="hover:text-blue-200 flex items-center"><span class="mr-1">ℹ️</span> About Us</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="hero-image w-full h-72 flex items-center justify-center text-center text-white mt-16" id="hero">
+    <div class="max-w-4xl px-4">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Loan Application</h1>
+      <p class="text-xl md:text-2xl">Apply for a loan quickly and securely</p>
+    </div>
+  </div>
+  <main id="main" class="fade-transition flex-grow flex items-center justify-center w-full px-4 py-12 -mt-8">
+    <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-sm transition-all duration-300 transform hover:scale-105 fade-in relative z-10">
+      <div class="text-center mb-6">
+        <div class="flex justify-center mb-4">
+          <div class="bg-blue-100 p-3 rounded-full">
+            <span class="text-3xl">💼</span>
+          </div>
+        </div>
+        <h2 class="text-2xl font-bold text-blue-900 mb-2">Loan Application</h2>
+        <p class="text-gray-600">Apply for a loan quickly and securely</p>
+      </div>
+
+      <div id="messageContainer" class="mb-4 hidden">
+        <!-- Messages will be displayed here -->
+      </div>
+
+      <form id="loanForm" method="POST" action="" class="space-y-5">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700 mb-1">👤 Account Holder</label>
+          <input type="text" id="name" name="name" placeholder="Enter your full name" required
+                 class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+        </div>
+
+        <div>
+          <label for="accnum" class="block text-sm font-medium text-gray-700 mb-1">🏦 Account Number</label>
+          <input type="text" id="accnum" name="accnum" placeholder="Enter your account number" required
+                 class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+        </div>
+
+        <div>
+          <label for="phno" class="block text-sm font-medium text-gray-700 mb-1">📱 Phone Number</label>
+          <input type="text" id="phno" name="phno" placeholder="Enter your phone number" required
+                 class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+        </div>
+
+        <div>
+          <label for="ifsc" class="block text-sm font-medium text-gray-700 mb-1">🏦 IFSC Code</label>
+          <input type="text" id="ifsc" name="ifsc" placeholder="Enter your IFSC code" required
+                 class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+        </div>
+
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700 mb-1">📧 Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required
+                 class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+        </div>
+
+        <div>
+          <label for="loanamount" class="block text-sm font-medium text-gray-700 mb-1">💵 Loan Amount</label>
+          <input type="number" id="loanamount" name="loanamount" placeholder="Enter the loan amount" required
+                 class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+        </div>
+
+        <div>
+          <label for="loanoption" class="block text-sm font-medium text-gray-700 mb-1">💡 Reason for Loan</label>
+          <select id="loanoption" name="loanoption" required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+            <option value="" disabled selected>Select a reason</option>
+            <option value="Education">🎓 Education</option>
+            <option value="Business">💼 Business</option>
+            <option value="Hospital">🏥 Medical Expenses</option>
+            <option value="Vehicle">🚗 Vehicle Purchase</option>
+            <option value="Farming">🌾 Agriculture & Farming</option>
+            <option value="House">🏠 Home Loan</option>
+            <option value="Other">📦 Other</option>
+          </select>
+        </div>
+
+        <button type="submit" id="applyButton"
+                class="w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
+          <span class="mr-2">💸</span> Apply for Loan
+        </button>
+      </form>
+      
+      <!-- Download button outside the form -->
+      <button id="downloadReportBtn" onclick="downloadLoanReport()"
+              type="button"
+              class="w-full mt-3 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
+        <span class="mr-2">📄</span> Download Report
+      </button>
+
+      <div class="mt-6 text-center text-sm text-gray-500">
+        <p>Need help? <a href="/customercare" class="text-blue-600 hover:underline">Contact support</a> 🧑‍💻</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="w-full bg-blue-900 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">🏦 Bank of America</h3>
+          <p class="text-blue-200">Trusted banking services since 1998</p>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Services</h4>
+          <ul class="space-y-2">
+            <li><a href="/accdver" class="text-blue-200 hover:text-white">Checking Accounts</a></li>
+            <li><a href="/accver" class="text-blue-200 hover:text-white">Savings Accounts</a></li>
+            <li><a href="/loan" class="text-blue-200 hover:text-white">Loans</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white">Investments</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Support</h4>
+          <ul class="space-y-2">
+            <li><a href="/customercare" class="text-blue-200 hover:text-white">Contact Us</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white">FAQs</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Check if jsPDF is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof window.jspdf === 'undefined') {
+        console.error('jsPDF library not loaded properly');
+        const downloadBtn = document.getElementById('downloadReportBtn');
+        if (downloadBtn) {
+          downloadBtn.disabled = true;
+          downloadBtn.classList.add('bg-gray-400');
+          downloadBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+          downloadBtn.title = 'PDF library not available';
+        }
+      } else {
+        console.log('jsPDF library loaded successfully');
+      }
+    });
+
+    // Handle form submission
+    document.getElementById('loanForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const messageContainer = document.getElementById('messageContainer');
+      messageContainer.classList.remove('hidden');
+      messageContainer.innerHTML = '<p class="success-message flex items-center justify-center"><span class="mr-2">✅</span> Loan application submitted successfully!</p>';
+      
+      // Scroll to the message
+      messageContainer.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    function navigateTo(page) {
+      const main = document.getElementById('main');
+      const hero = document.getElementById('hero');
+
+      main.classList.add('fade-out');
+      hero.classList.add('fade-out');
+
+      setTimeout(() => {
+        window.location.href = `/${page}`;
+      }, 400);
+    }
+
+    function showMessage(message, isError = false) {
+      const messageContainer = document.getElementById('messageContainer');
+      messageContainer.classList.remove('hidden');
+      
+      const messageClass = isError ? 'error-message' : 'success-message';
+      const icon = isError ? '⚠️' : '✅';
+      
+      messageContainer.innerHTML = `<p class="${messageClass} flex items-center justify-center"><span class="mr-2">${icon}</span> ${message}</p>`;
+      
+      // Scroll to the message
+      messageContainer.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    async function downloadLoanReport() {
+      try {
+        // Validate form fields first
+        const requiredFields = ['name', 'accnum', 'ifsc', 'email', 'phno', 'loanoption', 'loanamount'];
+        let missingFields = [];
+        
+        for (const field of requiredFields) {
+          const el = document.getElementById(field);
+          if (!el || !el.value.trim()) {
+            missingFields.push(field);
+          }
+        }
+        
+        if (missingFields.length > 0) {
+          showMessage(`Please fill in all required fields before downloading the report: ${missingFields.join(', ')}`, true);
+          return;
+        }
+        
+        // Check if jsPDF is loaded
+        if (typeof window.jspdf === 'undefined') {
+          showMessage('PDF library not loaded. Please refresh the page and try again.', true);
+          return;
+        }
+        
+        const { jsPDF } = window.jspdf;
+        
+        // Get current form values with better handling
+        const getValue = (id) => {
+          const el = document.getElementById(id);
+          return (el && el.value.trim()) ? el.value.trim() : '-';
+        };
+
+        const formData = {
+          name: getValue('name'),
+          accnum: getValue('accnum'),
+          ifsc: getValue('ifsc'),
+          email: getValue('email'),
+          phno: getValue('phno'),
+          loanoption: getValue('loanoption'),
+          loanamount: getValue('loanamount')
+        };
+        
+        // Debug log to verify data is being collected
+        console.log("Form data:", formData);
+        
+        // Create PDF
+        const doc = new jsPDF();
+        
+        // Current date and reference
+        const date = new Date();
+        const dateStr = date.toLocaleDateString();
+        const timeStr = date.toLocaleTimeString();
+        const referenceId = "LOAN-" + Math.floor(Math.random() * 90000 + 10000);
+
+        // --------- HEADER ---------
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(18);
+        doc.setTextColor(0, 0, 128);
+        doc.text("BANK OF AMERICA", 105, 20, null, null, "center");
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(14);
+        doc.text("LOAN REPORT", 105, 28, null, null, "center");
+
+        doc.setFontSize(10);
+        doc.setTextColor(80);
+        doc.text(`Date: ${dateStr}`, 20, 38);
+        doc.text(`Time: ${timeStr}`, 20, 43);
+        doc.text(`Reference: ${referenceId}`, 20, 48);
+
+        doc.setDrawColor(0, 102, 204);
+        doc.setLineWidth(0.5);
+        doc.line(20, 52, 190, 52);
+
+        // --------- CUSTOMER INFO ---------
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(12);
+        doc.setTextColor(33, 37, 41);
+        doc.text("Customer Information", 20, 65);
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(11);
+        doc.setTextColor(0);
+
+        let yPos = 73;
+        const spacing = 7;
+
+        // Customer details table
+        const customerInfo = [
+          ["Account Holder:", formData.name],
+          ["Account Number:", formData.accnum],
+          ["IFSC Code:", formData.ifsc],
+          ["Email Address:", formData.email],
+          ["Phone Number:", formData.phno]
+        ];
+
+        customerInfo.forEach(([label, value]) => {
+          doc.text(label, 25, yPos);
+          doc.text(value, 80, yPos);
+          yPos += spacing;
+        });
+
+        // --------- LOAN INFO ---------
+        yPos += spacing; // Add extra space before loan section
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(12);
+        doc.text("Loan Information", 20, yPos);
+        yPos += spacing;
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(11);
+
+        // Loan details table
+        const loanInfo = [
+          ["Loan Type:", formData.loanoption],
+          ["Loan Amount:", `₹${formData.loanamount}`]
+        ];
+
+        loanInfo.forEach(([label, value]) => {
+          doc.text(label, 25, yPos);
+          doc.text(value, 80, yPos);
+          yPos += spacing;
+        });
+
+        // --------- FOOTER ---------
+        doc.setFontSize(10);
+        doc.setTextColor(100);
+        doc.text("Thank you for choosing Bank of America.", 105, 275, null, null, "center");
+
+        // Save with dynamic filename
+        const fileName = `${referenceId}_${formData.name.replace(/\s+/g, '_')}_LoanReport.pdf`;
+        doc.save(fileName);
+        
+        showMessage('Loan report downloaded successfully!');
+
+      } catch (error) {
+        console.error("Error generating PDF:", error);
+        showMessage(`Failed to generate PDF: ${error.message}`, true);
+      }
+    }
+  </script>
+</body>
+</html>
+
+
+
