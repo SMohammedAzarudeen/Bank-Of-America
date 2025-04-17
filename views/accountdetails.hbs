@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account Details</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <nav class="w-full bg-blue-900 text-white shadow-md fixed top-0 left-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <span class="text-2xl font-bold">🏦 Bank of America</span>
+      <div class="hidden md:flex space-x-6">
+        <a href="/accdashboard" class="hover:text-blue-300">🏠 Home</a>
+        <a href="/customercare" class="hover:text-blue-300">📞 Customer Care</a>
+        <a href="/features" class="hover:text-blue-300">✨ Features</a>
+        <a href="/security" class="hover:text-blue-300">🔐 Security</a>
+        <a href="/aboutus" class="hover:text-blue-300">ℹ️ About Us</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="flex-grow flex items-center justify-center w-full px-4 pt-28 pb-12">
+    <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-xl transition-all duration-300 transform hover:scale-[1.02]">
+
+      <div class="text-center mb-6">
+        <div class="flex justify-center mb-4">
+          <div class="bg-blue-100 p-3 rounded-full">
+            <span class="text-3xl">👤</span>
+          </div>
+        </div>
+        <h2 class="text-3xl font-bold text-blue-900 mb-2">Account Details</h2>
+        <p class="text-gray-600">Your personal and financial information at a glance</p>
+      </div>
+
+      <!-- Account Info -->
+      <div class="space-y-4 text-gray-700">
+        <div class="flex justify-between items-center border-b pb-2">
+          <span>👤 <strong>Account Holder:</strong></span>
+          <span>{{name}}</span>
+        </div>
+        <div class="flex justify-between items-center border-b pb-2">
+          <span>🏦 <strong>Account Number:</strong></span>
+          <span>{{accnum}}</span>
+        </div>
+        <div class="flex justify-between items-center border-b pb-2">
+          <span>🏛️ <strong>IFSC Code:</strong></span>
+          <span>{{ifsc}}</span>
+        </div>
+        <div class="flex justify-between items-center border-b pb-2">
+          <span>📧 <strong>Email Address:</strong></span>
+          <span>{{email}}</span>
+        </div>
+        <div class="flex justify-between items-center border-b pb-2">
+          <span>📞 <strong>Phone Number:</strong></span>
+          <span>{{phno}}</span>
+        </div>
+        <div class="flex justify-between items-center mt-6 text-blue-800 text-lg font-semibold bg-blue-50 px-4 py-3 rounded-xl">
+          <span>💰 Current Balance:</span>
+          <span>₹ {{Bank_Amount}}</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="mt-8 space-y-3">
+        <a href="/accdashboard"
+          class="w-full block text-center bg-blue-900 hover:bg-blue-800 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300">
+          🔙 Back to Dashboard
+        </a>
+        <button onclick="downloadPDF()"
+          class="w-full bg-green-600 hover:bg-green-500 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 flex justify-center items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Download Statement
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-900 text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">Bank of America</h3>
+          <p class="text-blue-200">Serving customers with excellence since 1956.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+          <p class="text-blue-200">1-800-432-1000</p>
+          <p class="text-blue-200">support@bankofamerica.com</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+          <ul class="text-blue-200 space-y-2">
+            <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-white">Terms of Service</a></li>
+            <li><a href="#" class="hover:text-white">Security Information</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-8 text-center text-sm text-blue-200">© 2025 Bank of America. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- PDF Download Script -->
+  <script>
+    async function downloadPDF() {
+      try {
+        const { jsPDF } = window.jspdf;
+        
+        // Check if jsPDF is available
+        if (!jsPDF) {
+          console.error("jsPDF is not loaded correctly");
+          alert("PDF generation library not loaded. Please try again later.");
+          return;
+        }
+        
+        // Create PDF document
+        const doc = new jsPDF({
+          orientation: "portrait",
+          unit: "mm",
+          format: "a4"
+        });
+        
+        // Add fonts
+        doc.setFont("helvetica");
+        
+        // Get account details
+        const name = "{{name}}";
+        const accnum = "{{accnum}}";
+        const ifsc = "{{ifsc}}";
+        const email = "{{email}}";
+        const phno = "{{phno}}";
+        const balance = "{{Bank_Amount}}";
+        
+        // --------- WATERMARK ---------
+        doc.setTextColor(230, 230, 230);
+        doc.setFontSize(60);
+        doc.setFont("helvetica", "bold");
+        doc.text("CONFIDENTIAL", 105, 150, null, 45, "center");
+        
+        // --------- HEADER ---------
+        // Bank Logo placeholder (if available)
+        // doc.addImage(logoData, 'PNG', 20, 10, 30, 10);
+        
+        // Bank name and title
+        doc.setFontSize(20);
+        doc.setTextColor(0, 51, 102); // Dark blue
+        doc.setFont("helvetica", "bold");
+        doc.text("BANK OF AMERICA", 105, 20, null, null, "center");
+        
+        doc.setFontSize(16);
+        doc.text("ACCOUNT STATEMENT", 105, 30, null, null, "center");
+        
+        // Date and reference
+        doc.setFontSize(10);
+        doc.setTextColor(100);
+        doc.setFont("helvetica", "normal");
+        const today = new Date();
+        const dateStr = today.toLocaleDateString('en-US', { 
+          year: 'numeric', 
+          month: 'long', 
+          day: 'numeric' 
+        });
+        const timeStr = today.toLocaleTimeString('en-US', { 
+          hour: '2-digit', 
+          minute: '2-digit' 
+        });
+        
+        doc.text(`Date: ${dateStr}`, 20, 40);
+        doc.text(`Time: ${timeStr}`, 20, 45);
+        doc.text(`Reference: BOA-${Math.floor(Math.random() * 10000)}-${today.getFullYear()}`, 20, 50);
+        
+        // Decorative line
+        doc.setDrawColor(0, 51, 102);
+        doc.setLineWidth(0.5);
+        doc.line(20, 55, 190, 55);
+        
+        // --------- CUSTOMER SECTION ---------
+        doc.setFontSize(14);
+        doc.setTextColor(0, 51, 102);
+        doc.setFont("helvetica", "bold");
+        doc.text("Customer Information", 20, 65);
+        
+        // Customer details table
+        doc.setFontSize(11);
+        doc.setTextColor(0);
+        doc.setFont("helvetica", "normal");
+        
+        const startY = 75;
+        const lineHeight = 7;
+        
+        const customerInfo = [
+          ["Account Holder:", name],
+          ["Account Number:", accnum],
+          ["IFSC Code:", ifsc],
+          ["Email Address:", email],
+          ["Phone Number:", phno]
+        ];
+        
+        customerInfo.forEach(([label, value], index) => {
+          const y = startY + (index * lineHeight);
+          doc.setFont("helvetica", "bold");
+          doc.text(label, 20, y);
+          doc.setFont("helvetica", "normal");
+          doc.text(value, 70, y);
+        });
+        
+        // --------- BALANCE SECTION ---------
+        // Balance highlight box
+        doc.setDrawColor(200, 220, 240); // Light blue border
+        doc.setFillColor(240, 247, 255); // Very light blue fill
+        doc.roundedRect(20, 115, 170, 20, 3, 3, 'FD');
+        
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(12);
+        doc.setTextColor(0, 51, 102);
+        doc.text("Current Balance:", 30, 127);
+        doc.text(`₹ ${balance}`, 160, 127, { align: "right" });
+        
+        // --------- TRANSACTION SECTION ---------
+        doc.setFontSize(14);
+        doc.setTextColor(0, 51, 102);
+        doc.setFont("helvetica", "bold");
+        doc.text("Recent Transactions", 20, 150);
+        
+        // Transaction table header
+        doc.setFillColor(230, 236, 245); // Light blue background
+        doc.rect(20, 155, 170, 10, 'F');
+        
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(10);
+        doc.setTextColor(0, 51, 102);
+        doc.text("Date", 25, 162);
+        doc.text("Description", 55, 162);
+        doc.text("Amount", 145, 162, { align: "right" });
+        doc.text("Balance", 180, 162, { align: "right" });
+        
+        // Sample transactions
+        const transactions = [
+          ["04/12/2025", "Salary Credit", "+₹ 45,000.00", "₹ 78,500.00"],
+          ["04/10/2025", "Utility Payment", "-₹ 2,500.00", "₹ 33,500.00"],
+          ["04/05/2025", "Online Transfer", "-₹ 10,000.00", "₹ 36,000.00"],
+          ["04/01/2025", "ATM Withdrawal", "-₹ 5,000.00", "₹ 46,000.00"]
+        ];
+        
+        let transY = 165;
+        transactions.forEach((transaction, i) => {
+          transY += 8;
+          
+          // Alternate row colors
+          if (i % 2 === 1) {
+            doc.setFillColor(247, 249, 252);
+            doc.rect(20, transY - 6, 170, 8, 'F');
+          }
+          
+          doc.setFont("helvetica", "normal");
+          doc.setFontSize(9);
+          doc.setTextColor(0);
+          doc.text(transaction[0], 25, transY);
+          doc.text(transaction[1], 55, transY);
+          
+          // Color coding for amounts
+          if (transaction[2].includes("+")) {
+            doc.setTextColor(0, 128, 0); // Green for positive
+          } else {
+            doc.setTextColor(192, 0, 0); // Red for negative
+          }
+          doc.text(transaction[2], 145, transY, { align: "right" });
+          
+          // Reset to black for balance
+          doc.setTextColor(0);
+          doc.text(transaction[3], 180, transY, { align: "right" });
+        });
+        
+        // --------- NOTICE SECTION ---------
+        doc.setFontSize(9);
+        doc.setTextColor(100);
+        doc.text("For any discrepancies, please contact our customer service within 15 days.", 105, 220, null, null, "center");
+        
+        // Security notice box
+        doc.setDrawColor(200, 200, 200);
+        doc.setFillColor(252, 252, 252);
+        doc.roundedRect(20, 225, 170, 25, 2, 2, 'FD');
+        
+        doc.setFontSize(8);
+        doc.setTextColor(100);
+        doc.text("SECURITY NOTICE: This document contains confidential financial information. If you have received", 25, 232);
+        doc.text("this document in error, please notify Bank of America immediately and destroy the document securely.", 25, 237);
+        doc.text("Bank of America will never ask for your password or PIN through email, phone, or SMS.", 25, 242);
+        
+        // --------- FOOTER ---------
+        doc.setFontSize(8);
+        doc.setTextColor(0, 51, 102);
+        doc.text("Bank of America, N.A. Member FDIC. © 2025 Bank of America Corporation.", 105, 260, null, null, "center");
+        doc.text("Equal Housing Lender", 105, 265, null, null, "center");
+        
+        // Page number
+        doc.setFontSize(8);
+        doc.text("Page 1 of 1", 180, 280, { align: "right" });
+        
+        // Download the PDF with a professional filename
+        doc.save("BankOfAmerica_AccountStatement.pdf");
+        
+      } catch (error) {
+        console.error("Error generating PDF:", error);
+        alert("There was a problem generating your PDF. Please try again later.");
+      }
+    }
+  </script>
+</body>
+</html>
