@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Care - Bank of America</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #0033a0; 
+            padding: 10px 20px;
+            color: white;
+        }
+
+        .navbar-left .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar-right {
+            display: flex;
+            gap: 20px; 
+        }
+
+        .navbar-right .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-right .nav-link:hover {
+            color: #ffc72c; 
+        }
+
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            margin: 50px auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #0070c9;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            font-size: 16px;
+            padding: 8px 0;
+        }
+
+        .phone {
+            font-size: 18px;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+
+        .d {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin-top: 20px;
+        }
+
+        .form-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .form-container input, .form-container select {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-container button {
+            width: 84%;
+            padding: 10px;
+            background-color: #0070c9;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .form-container button:hover {
+            background-color: #005bb5;
+        }
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(-10px);
+            animation: fadeIn 0.3s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sections {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sections {
+                grid-template-columns: 1fr;
+            }
+        }
+        .error-message {
+    display: inline-block;
+    background-color: rgba(255, 0, 0, 0.1); /* Light transparent red */
+    color: darkred; /* Dark red text */
+    padding: 10px 20px;
+    border-radius: 8px; /* Small border radius */
+    text-align: center;
+    font-weight: normal;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards, shake 0.5s ease-in-out 0.5s;
+}
+.success-message {
+    display: inline-block;
+    background-color: rgba(0, 255, 17, 0.1); /* Light transparent red */
+    color: rgb(37, 143, 19); /* Dark red text */
+    padding: 10px 20px;
+    border-radius: 8px; /* Small border radius */
+    text-align: center;
+    font-weight: normal;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards, shake 0.5s ease-in-out 0.5s;
+}
+/* Fade-in effect */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slight shaking effect */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-3px); }
+}
+
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-left">
+            <span class="logo">Bank of America</span>
+        </div>
+        <div class="navbar-right">
+            <a href="accdashboard" class="nav-link" onclick="navigateTo('accdashboard')">🏢 Home</a>
+            <a href="features" class="nav-link" onclick="navigateTo('features')">✨Features</a>
+            <a href="security" class="nav-link" onclick="navigateTo('security')">🔒 Security</a>            
+            <a href="aboutus" class="nav-link">ℹ️About Us</a>            
+
+
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>📞 Customer Care Service</h1>
+        <p>
+            At <b>Bank of America</b>, we are committed to providing top-notch customer support. Our customer service team is available <b>24/7</b> to assist you with banking queries, account management, and fraud protection. Feel free to contact us for any help! 😊
+        </p>
+
+        <h2>🌟 Features of Our Customer Care Service</h2>
+        <ul>
+            <li>📅 <b>24/7 Support:</b> We are available anytime to assist you.</li>
+            <li>💳 <b>Card Assistance:</b> Report lost or stolen cards immediately.</li>
+            <li>🔒 <b>Fraud Protection:</b> Secure your account from unauthorized access.</li>
+            <li>🏦 <b>Account Management:</b> Get help with transactions and statements.</li>
+            <li>📧 <b>Email & Chat Support:</b> Connect with us via multiple channels.</li>
+        </ul>
+
+        <h2>☎️ Contact Us</h2>
+        <p>
+            📞 <b>Customer Service Number:</b> <span class="phone">+91-9003563788</span>
+        </p>
+
+        <h3 class="d">For Any Other Problem, Provide Your Details</h3>
+
+        <!-- Customer Service Form -->
+        <div class="form-container">
+            <form action="" method="POST">
+                {{#if errorMessage}}
+    <p class="error-message"> {{errorMessage}} </p>
+{{/if}}
+                {{#if successMessage}}
+    <p class="message success-message">{{successMessage}}</p>
+{{/if}}
+
+
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="text" name="accnum" placeholder="Account Number" required>
+                <input type="number" name="phno" placeholder="Phone Number" required>
+                
+                <select name="pt" required>
+                    <option value="">Select Problem Type</option>
+                    <option value="credit_debit_issue">💰 Amount Credit/Debit Problem</option>
+                    <option value="account_balance">📊 Account Balance</option>
+                    <option value="fraud">🚨 Fraud Amount Debit</option>
+                    <option value="lost_card">💳 Lost Card</option>
+                    <option value="login_issue">🔑 Login/Create Account Problem</option>
+                    <option value="other">📝 Other</option>
+                </select>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function navigateTo(page) {
+            const sections = document.querySelector('.sections');
+            sections.classList.add('fade-out');
+            setTimeout(() => {
+                window.location.href = page;
+            }, 300);
+        }
+</body>
+</html>
