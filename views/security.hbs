@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank of America - Security</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f7fa;
+    color: #333;
+}
+
+/* Header Styling */
+header {
+    background-color: #004F98; /* Bank of America Blue */
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header .logo h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header .navbar {
+    display: flex;
+    gap: 20px;
+}
+
+header .navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+header .navbar a:hover {
+    color: #4CAF50; /* Green on hover */
+}
+
+/* Hero Section Styling */
+.hero {
+    background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1611&q=80'); /* New Banking Image */
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-content h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 18px;
+}
+
+/* Security Features Section Styling */
+.security-features {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.security-features h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: #004F98;
+}
+
+.security-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #004F98;
+}
+
+.card p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #004F98;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 40px;
+}
+
+footer p {
+    font-size: 14px;
+}
+.fade-out {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(-10px);
+            animation: fadeIn 0.3s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sections {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sections {
+                grid-template-columns: 1fr;
+            }
+        }
+</style>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>Bank of America</h1>
+        </div>
+        <nav class="navbar">
+            <a href="accdashboard" onclick="navigateTo('accdashboard')">🏢Home</a>
+            <a href="customercare" onclick="navigateTo('customercare')">📞Customer Care</a>
+            <a href="features" onclick="navigateTo('features')">✨Features</a>
+            <a href="aboutus" >ℹ️About Us</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Welcome to Bank of America</h2>
+            <p>Your trusted partner in banking. Explore our features designed to make your financial life easier and more secure.</p>
+        </div>
+    </section>
+
+    <!-- Security Features Section -->
+    <section class="security-features">
+        <h2>🔒 Security Features</h2>
+        <div class="security-cards">
+            <!-- Advanced Encryption -->
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/3064/3064155.png" alt="Encryption Icon">
+                <h3>🔐 Advanced Encryption</h3>
+                <p>We use state-of-the-art encryption technology to protect your data and transactions. Your information is safe with us.</p>
+            </div>
+
+            <!-- Fraud Protection -->
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/1828/1828640.png" alt="Fraud Protection Icon">
+                <h3>🛡️ Fraud Protection</h3>
+                <p>Our advanced fraud detection systems monitor your accounts 24/7 to prevent unauthorized transactions.</p>
+            </div>
+
+            <!-- Two-Factor Authentication -->
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/295/295128.png" alt="2FA Icon">
+                <h3>📱 Two-Factor Authentication</h3>
+                <p>Add an extra layer of security to your account with two-factor authentication (2FA).</p>
+            </div>
+
+            <!-- Secure Mobile Banking -->
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/3050/3050157.png" alt="Mobile Banking Icon">
+                <h3>📲 Secure Mobile Banking</h3>
+                <p>Bank on the go with our secure mobile app, designed to keep your transactions safe.</p>
+            </div>
+
+            <!-- Biometric Login -->
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png" alt="Biometric Icon">
+                <h3>👤 Biometric Login</h3>
+                <p>Use fingerprint or facial recognition for quick and secure access to your accounts.</p>
+            </div>
+
+            <!-- Alerts & Notifications -->
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/1827/1827428.png" alt="Alerts Icon">
+                <h3>🔔 Alerts & Notifications</h3>
+                <p>Get instant alerts for transactions, ensuring you stay informed about account activity.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2023 Bank of America. All rights reserved.</p>
+    </footer>
+    <script>
+        function navigateTo(page) {
+            const sections = document.querySelector('.sections');
+            sections.classList.add('fade-out');
+            setTimeout(() => {
+                window.location.href = page;
+            }, 300);
+        }
+</body>
+</html>
