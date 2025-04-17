@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bank of America - Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .error-message {
+      display: inline-block;
+      background-color: rgba(255, 0, 0, 0.1);
+      color: darkred;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: normal;
+      animation: fadeIn 0.5s ease-in-out forwards, shake 0.5s ease-in-out 0.5s;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-3px); }
+    }
+
+    .hero-image {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('https://img.freepik.com/free-photo/pay-goods-by-credit-card-through-smartphone-coffee-shop_1150-18770.jpg?uid=R158732208&ga=GA1.1.1796873373.1734259752&semt=ais_hybrid&w=740');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <nav class="w-full bg-blue-900 text-white shadow-lg fixed top-0 left-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <span class="text-2xl font-bold">🏦 Bank of America</span>
+      <span class="text-sm hidden md:inline">📞 Customer Care: 1-800-123-4567</span>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero-image h-64 flex items-center justify-center text-white mt-16">
+    <div class="text-center px-4">
+      <h1 class="text-4xl font-bold">Secure Login to Your Account</h1>
+      <p class="text-lg mt-2">Access your banking dashboard safely 🔐</p>
+    </div>
+  </div>
+
+  <!-- Login Form -->
+  <main class="flex-grow flex items-center justify-center px-4 py-12 -mt-8">
+    <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-sm transition-all transform hover:scale-105">
+      <div class="text-center mb-6">
+        <div class="flex justify-center mb-4">
+          <div class="bg-blue-100 p-3 rounded-full">
+            <span class="text-3xl">👤</span>
+          </div>
+        </div>
+        <h2 class="text-2xl font-bold text-blue-900 mb-2">Login</h2>
+        <p class="text-gray-600">Welcome back! Please login to your account</p>
+      </div>
+
+      {{#if errorMessage}}
+      <p class="error-message mb-4 flex items-center justify-center"><span class="mr-2">⚠️</span> {{errorMessage}}</p>
+      {{/if}}
+
+      <form method="POST" action="/login" class="space-y-5">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700 mb-1">👤 Username</label>
+          <input type="text" id="name" name="name" placeholder="Enter your username"
+                 required
+                 class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+        </div>
+
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700 mb-1">🔑 Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password"
+                 required
+                 class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+        </div>
+
+        <button type="submit"
+                class="w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
+          <span class="mr-2">🔓</span> Login
+        </button>
+      </form>
+
+      <div class="mt-6 text-center text-sm text-gray-500">
+        <p>New User? <a href="/register" class="text-blue-600 hover:underline">Register Here ✨</a></p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-900 text-white text-center py-6 mt-12">
+    <p>&copy; 2025 Bank of America. All rights reserved.</p>
+  </footer>
+</body>
+</html>
+
