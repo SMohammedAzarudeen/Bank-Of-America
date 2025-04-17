@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Analytics - Bank of America</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background: #004F98;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+        }
+
+        .navbar a:hover {
+            color: #4CAF50;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #004F98;
+            margin-bottom: 20px;
+        }
+
+        canvas {
+            margin-bottom: 40px;
+        }
+
+        .chart-center {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #004F98;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: #003366;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">🏦 Bank of America</div>
+        <div>
+            <a href="accdashboard.html">⬅ Back to Dashboard</a>
+        </div>
+    </div>
+
+    <!-- Analytics Content -->
+    <div class="container">
+        <h2>Your Financial Analytics</h2>
+
+        <canvas id="transactionChart" width="400" height="200"></canvas>
+
+        <!-- Smaller Pie Chart Centered -->
+        <div class="chart-center">
+            <canvas id="categoryPieChart" width="200" height="200"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Sample data
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+        const depositData = [5000, 7000, 4500, 6000, 8000, 7500];
+        const withdrawData = [3000, 2000, 2500, 1000, 3500, 4000];
+        const transferData = [1000, 1500, 1300, 1700, 1600, 1800];
+
+        // Line Chart
+        const ctx1 = document.getElementById('transactionChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: months,
+                datasets: [
+                    {
+                        label: 'Deposits',
+                        data: depositData,
+                        borderColor: '#4CAF50',
+                        backgroundColor: 'rgba(76, 175, 80, 0.2)',
+                        fill: true,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Withdrawals',
+                        data: withdrawData,
+                        borderColor: '#f44336',
+                        backgroundColor: 'rgba(244, 67, 54, 0.2)',
+                        fill: true,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Transfers',
+                        data: transferData,
+                        borderColor: '#2196F3',
+                        backgroundColor: 'rgba(33, 150, 243, 0.2)',
+                        fill: true,
+                        tension: 0.3
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Transaction Overview (Last 6 Months)'
+                    }
+                }
+            }
+        });
+
+        // Pie Chart
+        const ctx2 = document.getElementById('categoryPieChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: ['Deposits', 'Withdrawals', 'Transfers'],
+                datasets: [{
+                    data: [
+                        depositData.reduce((a, b) => a + b, 0),
+                        withdrawData.reduce((a, b) => a + b, 0),
+                        transferData.reduce((a, b) => a + b, 0)
+                    ],
+                    backgroundColor: ['#4CAF50', '#f44336', '#2196F3'],
+                    borderColor: ['#388E3C', '#D32F2F', '#1976D2'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Total Transaction Distribution'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
