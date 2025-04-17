@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank of America - Features</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f7fa;
+    color: #333;
+}
+
+/* Header Styling */
+header {
+    background-color: #004F98; /* Bank of America Blue */
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header .logo h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header .navbar {
+    display: flex;
+    gap: 20px;
+}
+
+header .navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+header .navbar a:hover {
+    color: #4CAF50; /* Green on hover */
+}
+
+/* Hero Section Styling */
+.hero {
+    background-image: url('https://images.unsplash.com/photo-1601597111158-2fceff292cdc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-content h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 18px;
+}
+
+/* Features Section Styling */
+.features {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.features h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: #004F98;
+}
+
+.feature-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #004F98;
+}
+
+.card p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #004F98;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 40px;
+}
+
+footer p {
+    font-size: 14px;
+}
+ .fade-out {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(-10px);
+            animation: fadeIn 0.3s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sections {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sections {
+                grid-template-columns: 1fr;
+            }
+        }
+</style>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>🏦 Bank of America</h1>
+        </div>
+        <nav class="navbar">
+            <a href="accdashboard" onclick="navigateTo('accdashboard')">🏢Home</a>
+            <a href="customercare">📞 Customer Care</a>
+            <a href="security">🔒 Security</a>
+            <a href="aboutus">ℹ️ About Us</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Welcome to Bank of America</h2>
+            <p>Your trusted partner in banking. Explore our features designed to make your financial life easier and more secure.</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2>Our Features</h2>
+        <div class="feature-cards">
+            <!-- Security Feature -->
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/3064/3064155.png" alt="Security Icon">
+                <h3>Advanced Security</h3>
+                <p>We use cutting-edge technology to protect your accounts and personal information. Your safety is our priority.</p>
+            </div>
+
+            <!-- Customer Care Feature -->
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Customer Care Icon">
+                <h3>24/7 Customer Care</h3>
+                <p>Our dedicated support team is available round the clock to assist you with any queries or concerns.</p>
+            </div>
+
+            <!-- Mobile Banking Feature -->
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/3050/3050157.png" alt="Mobile Banking Icon">
+                <h3>Mobile Banking</h3>
+                <p>Access your accounts, transfer funds, and pay bills anytime, anywhere with our user-friendly mobile app.</p>
+            </div>
+
+            <!-- Online Banking Feature -->
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/3652/3652191.png" alt="Online Banking Icon">
+                <h3>Online Banking</h3>
+                <p>Manage your finances seamlessly with our secure and easy-to-use online banking platform.</p>
+            </div>
+
+            <!-- Loan Services Feature -->
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/3142/3142035.png" alt="Loan Services Icon">
+                <h3>Loan Services</h3>
+                <p>Get personalized loan options for home, car, education, and more with competitive interest rates.</p>
+            </div>
+
+            <!-- Investment Options Feature -->
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135696.png" alt="Investment Icon">
+                <h3>Investment Options</h3>
+                <p>Explore a wide range of investment opportunities to grow your wealth with expert guidance.</p>
+            </div>
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135679.png" alt="Financial Literacy Icon">
+                <h3>Financial Literacy</h3>
+                <p>Join our programs to learn about budgeting, saving, and investing for a secure financial future.</p>
+            </div>
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Credit Card Icon">
+                <h3>Credit Card Services</h3>
+                <p>Enjoy exclusive rewards, cashback, and benefits with our premium credit card offerings.</p>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2023 Bank of America. All rights reserved.</p>
+    </footer>
+</body>
+</html>
