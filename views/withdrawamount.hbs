@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bank of America - Withdraw Amount</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-3px); }
+    }
+    .fade-in {
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+    .success-message, .error-message {
+      animation: fadeIn 0.5s ease-out forwards, shake 0.5s ease-in-out 0.5s;
+    }
+    .hero-image {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            url('https://images.saymedia-content.com/.image/t_share/MTc2MjkxMDgzMjEzNDE1NTk3/the_easiest_way_to_withdraw_paypal_money.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+  </style>
+</head>
+<body class="font-['Inter'] bg-gray-50 min-h-screen flex flex-col">
+  <nav class="w-full bg-blue-900 text-white shadow-lg">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <span class="text-2xl font-bold">🏦 Bank of America</span>
+      </div>
+      <div class="hidden md:flex items-center space-x-6">
+        <a href="#" onclick="navigateTo('accdashboard')" class="hover:text-blue-200 flex items-center"><span class="mr-1">🏢</span> Home</a>
+        <a href="#" onclick="navigateTo('customercare')" class="hover:text-blue-200 flex items-center"><span class="mr-1">📞</span> Customer Care</a>
+        <a href="#" onclick="navigateTo('accdashboard')" class="hover:text-blue-200 flex items-center"><span class="mr-1">✨</span> Features</a>
+        <a href="#" onclick="navigateTo('security')" class="hover:text-blue-200 flex items-center"><span class="mr-1">🔒</span> Security</a>
+        <a href="#" onclick="navigateTo('aboutus')" class="hover:text-blue-200 flex items-center"><span class="mr-1">ℹ️</span> About Us</a>
+      </div>
+    </div>
+  </nav>
+  <div class="hero-image w-full h-72 flex items-center justify-center text-center text-white fade-in">
+    <div class="max-w-4xl px-4">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Withdraw Your Funds Safely</h1>
+      <p class="text-xl md:text-2xl">Quick and secure withdrawals whenever you need</p>
+    </div>
+  </div>
+  <main class="flex-grow flex items-center justify-center w-full px-4 py-12 -mt-8">
+    <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-sm transition-all duration-300 transform hover:scale-[1.01] fade-in relative z-10">
+      <div class="text-center mb-6">
+        <div class="flex justify-center mb-4">
+          <div class="bg-red-100 p-3 rounded-full">
+            <span class="text-3xl">💳</span>
+          </div>
+        </div>
+        <h2 class="text-2xl font-bold text-blue-900 mb-2">Withdraw Funds</h2>
+        <p class="text-gray-600">Take money out of your account securely</p>
+      </div>
+
+      <form method="POST" action="" class="space-y-5">
+        {{#if errorMessage}}
+          <div class="{{#if isSuccess}}bg-green-50 text-green-700{{else}}bg-red-50 text-red-700{{/if}} p-3 rounded-lg success-message flex items-center">
+            <span class="mr-2">{{#if isSuccess}}✅{{else}}⚠️{{/if}}</span>
+            {{errorMessage}}
+          </div>
+        {{/if}}
+        {{#if successMessage}}
+          <div class="bg-green-50 text-green-700 p-3 rounded-lg success-message flex items-center">
+            <span class="mr-2">✅</span>
+            {{successMessage}}
+          </div>
+        {{/if}}
+
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700 mb-1">👤 Username</label>
+          <input type="text" id="name" name="name" placeholder="Enter your username" 
+            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+        </div>
+
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700 mb-1">🔑 Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" 
+            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+        </div>
+
+        <div>
+          <label for="amount" class="block text-sm font-medium text-gray-700 mb-1">💵 Amount to Withdraw</label>
+          <input type="number" id="amount" name="amount" placeholder="0.00" min="1"
+            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+        </div>
+
+        <button type="submit" onclick="withdrawEffect()"
+          class="w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center">
+          <span class="mr-2">👇</span> Withdraw Funds
+        </button>
+      </form>
+
+      <div class="mt-6 text-center text-sm text-gray-500">
+        <p>Need help? <a href="/customercare" class="text-blue-600 hover:underline">Contact support</a> 🧑‍💻</p>
+      </div>
+    </div>
+  </main>
+  <div class="bg-gray-100 py-12 px-4">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-blue-900 mb-12">Why Withdraw With Us? 🚀</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-xl shadow-md text-center">
+          <div class="text-4xl mb-4">⚡</div>
+          <h3 class="text-xl font-semibold mb-2">Fast Processing</h3>
+          <p class="text-gray-600">Withdrawals processed instantly after verification</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-md text-center">
+          <div class="text-4xl mb-4">🔒</div>
+          <h3 class="text-xl font-semibold mb-2">Top-Notch Security</h3>
+          <p class="text-gray-600">Your funds are always safe with us</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-md text-center">
+          <div class="text-4xl mb-4">💼</div>
+          <h3 class="text-xl font-semibold mb-2">Professional Support</h3>
+          <p class="text-gray-600">Need help? We're always just a click away</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer (reuse from deposit) -->
+  <footer class="w-full bg-blue-900 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">🏦 Bank of America</h3>
+          <p class="text-blue-200">Trusted banking services since 1998</p>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Services</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-blue-200 hover:text-white">Checking Accounts</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white">Savings Accounts</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white">Loans</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white">Investments</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Support</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-blue-200 hover:text-white">Contact Us</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white">FAQs</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white">Branch Locator</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white">Online Banking Help</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Legal</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-blue-200 hover:text-white">Privacy Policy</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white">Terms of Service</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white">Security Center</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white">Disclosures</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-blue-800 mt-8 pt-8 text-center text-blue-200">
+        <p>© 2023 Bank of America. All rights reserved. Member FDIC. Equal Housing Lender. 🏛️</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function withdrawEffect() {
+      document.querySelector('form').classList.add('opacity-0', 'scale-95');
+      setTimeout(() => {
+        alert("Amount Withdrawn Successfully");
+        document.querySelector('form').classList.remove('opacity-0', 'scale-95');
+      }, 300);
+    }
+
+    function navigateTo(page) {
+      const content = document.querySelector('main');
+      content.classList.add('opacity-0', 'scale-95');
+      setTimeout(() => {
+        window.location.href = page;
+      }, 300);
+    }
+  </script>
+</body>
+</html>
