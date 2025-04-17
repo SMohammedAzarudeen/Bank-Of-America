@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank of America - Account Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fa;
+            color: #333;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .navbar {
+            background: #004F98;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #4CAF50;
+        }
+
+        .hero {
+            background-image: url('https://images.unsplash.com/photo-1601597111158-2fceff292cdc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 1000px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .hero-content h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+        }
+
+        .sections {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            width: 80%;
+            margin-bottom: 40px;
+        }
+
+        .section {
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .section:hover {
+            transform: scale(1.05);
+        }
+
+        .section img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+        }
+
+        .section h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #004F98;
+        }
+
+        .section p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(-10px);
+            animation: fadeIn 0.3s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sections {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sections {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar fade-in">
+        <div class="logo">🏦 Bank of America</div>
+        <div class="nav-links">
+            <a href="features" onclick="navigateTo('accdashboard')">✨ Features</a>
+            <a href="customercare" onclick="navigateTo('customercare')">📞 Customer Care</a>
+            <a href="security" onclick="navigateTo('security')">🔒 Security</a>
+            <a href="aboutus" onclick="navigateTo('aboutus')">ℹ️ About Us</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Welcome to Your Account Dashboard</h2>
+            <p>Manage your finances with ease and security. Explore all the features designed for you.</p>
+        </div>
+    </section>
+
+    <!-- Section Cards -->
+    <div class="sections fade-in">
+        <div class="section" onclick="navigateTo('depositamount')">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135672.png" alt="Deposit Icon">
+            <h3>Deposit Amount</h3>
+            <p>Deposit funds into your account securely and quickly.</p>
+        </div>
+        <div class="section" onclick="navigateTo('withdrawamount')">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135690.png" alt="Withdraw Icon">
+            <h3>Withdraw Amount</h3>
+            <p>Withdraw cash from your account anytime, anywhere.</p>
+        </div>
+        <div class="section" onclick="navigateTo('transferamount')">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png" alt="Transfer Icon">
+            <h3>Transfer Amount</h3>
+            <p>Transfer funds between accounts or to other banks.</p>
+        </div>
+        <div class="section" onclick="navigateTo('accdver')">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135723.png" alt="Account Details Icon">
+            <h3>Account Details</h3>
+            <p>View and manage your account information.</p>
+        </div>
+        <div class="section" onclick="navigateTo('accver')">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135706.png" alt="Balance Icon">
+            <h3>Account Balance</h3>
+            <p>Check your current account balance instantly.</p>
+        </div>
+        <div class="section" onclick="navigateTo('loan')">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135675.png" alt="Loan Icon">
+            <h3>Loan Services</h3>
+            <p>Explore loan options tailored to your needs.</p>
+        </div>
+        <div class="section" onclick="navigateTo('analytics')">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="Analytics Icon">
+            <h3>Analytics</h3>
+            <p>Visualize your financial activity trends with easy-to-understand charts.</p>
+        </div>
+    </div>
+
+    <script>
+        function navigateTo(page) {
+            const sections = document.querySelector('.sections');
+            sections.classList.add('fade-out');
+            setTimeout(() => {
+                window.location.href = page;
+            }, 300);
+        }
+    </script>
+</body>
+</html>
+
